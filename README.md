@@ -4,7 +4,13 @@ The API layer for project openbike (http://openbike.co) The initial implementati
 
 ## Usage
 
-lein run
+If you want to start the webserver and open a browser to the root page:
+
+   lein ring server
+
+If you don't want a browser or are running this code on a headless server or VM:
+
+   lein ring server-headless
 
 ## License
 
