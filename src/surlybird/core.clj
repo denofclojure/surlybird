@@ -5,12 +5,16 @@
             [compojure.handler :as handler]
             [compojure.response :as response]))
 
-(defn parse-sample-json [filename]
-  (let [json (slurp filename)]
-    (cheshire/parse-string json)))
+(defn get-coords [filename]
+  (let [everything (cheshire/parse-string (slurp filename))
+        coords-str (everything "coords")]
+    (cheshire/parse-string coords-str)))
 
 (defroutes main-routes
   (GET "/" [] "Hello root")
+  (GET "/coords" []
+    (prn "GET /coords")
+    (str (get-coords "data/sample.json")))
   (route/resources "/")
   (route/not-found "Page not found"))
 
@@ -18,4 +22,4 @@
   (handler/site main-routes))
 
 (defn -main []
-  (prn "sample json --- \n" (parse-sample-json "data/sample.json")))
+  (prn "coordinates from sample json --- \n" (get-coords "data/sample.json")))
