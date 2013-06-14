@@ -4,6 +4,9 @@
             [compojure.route :as route]
             [compojure.handler :as handler]
             [compojure.response :as response]))
+(def db
+  {:subprotocol "postgresql"
+   :subname "//127.0.0.1:5432/devspect-api"})
 
 (defn get-coords [filename]
   (let [everything (cheshire/parse-string (slurp filename))
