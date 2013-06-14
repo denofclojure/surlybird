@@ -12,6 +12,10 @@ If you don't want a browser or are running this code on a headless server or VM:
 
    lein ring server-headless
 
+Port forward from your VM through denofclojure.org
+
+   ssh -fNR 3333:localhost:3000 your-name-at@denofclojure.org
+
 ## License
 
 Copyright © 2013 The Den of Clojure
