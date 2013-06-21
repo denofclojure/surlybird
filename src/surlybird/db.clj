@@ -1,13 +1,12 @@
 (ns surlybird.core
-  (:require [clojure.java.jdbc :as jdbc]
-            [clojure.java.jdbc.sql :as sql]))
+  (:require [clojure.java.jdbc :as jdbc]))
 
-(def db {:classname "org.postgresql.Driver"
-         :subprotocol "postgres"
-         :subname "//localhost:5432/surlybird"
-         :user "surlybird"
-         :password "surlybird"})
+(def db "postgresql://surlybird:surlybird@localhost:5432/surlybird")
 
 (defn ping [db]
-    (jdbc/query db
-                (sql/select * :fruit)))
+  (jdbc/with-connection db
+    (jdbc/with-query-results results
+      ["select * from fruit"]
+      (into [] results))))
+
+;; (ping db)
