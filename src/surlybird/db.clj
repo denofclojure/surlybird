@@ -1,12 +1,14 @@
-(ns surlybird.core
+(ns surlybird.db
   (:require [clojure.java.jdbc :as jdbc]))
 
 (def db "postgresql://surlybird:surlybird@localhost:5432/surlybird")
 
 (defn ping [db]
-  (jdbc/with-connection db
-    (jdbc/with-query-results results
-      ["select * from fruit"]
-      (into [] results))))
+  (try
+    (jdbc/with-connection db
+      (jdbc/with-query-results results
+        ["select 1"]
+        true))
+    (catch Exception ex
+      false)))
 
-;; (ping db)
