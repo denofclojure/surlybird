@@ -1,6 +1,5 @@
 (ns surlybird.core
   (:require [cheshire.core :as json]
-            [clj-http.client :as http]
             [clojure.java.io :refer [reader file]]
             [compojure.core :refer :all]
             [compojure.route :as route]
