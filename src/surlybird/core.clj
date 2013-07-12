@@ -1,17 +1,20 @@
 (ns surlybird.core
-  (:require [cheshire.core :as cheshire]
+  (:require [cheshire.core :as json]
+            [clj-http.client :as http]
+            [clojure.java.io :refer [reader file]]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [compojure.handler :as handler]
             [compojure.response :as response]))
+
 (def db
   {:subprotocol "postgresql"
    :subname "//127.0.0.1:5432/devspect-api"})
 
 (defn get-coords [filename]
-  (let [everything (cheshire/parse-string (slurp filename))
-        coords-str (everything "coords")]
-    (cheshire/parse-string coords-str)))
+  (let [everything (json/parse-stream (reader (file filename)) true)
+        coords-str (everything :coords)]
+    (json/decode coords-str true)))
 
 (defroutes main-routes
   (GET "/" [] "Hello root")
