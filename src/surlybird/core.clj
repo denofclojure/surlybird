@@ -1,6 +1,7 @@
 (ns surlybird.core
   (:require [cheshire.core :as json]
             [clojure.java.io :refer [reader file]]
+            [clojure.pprint :refer [pprint]]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [compojure.handler :as handler]
@@ -27,4 +28,5 @@
   (handler/site main-routes))
 
 (defn -main []
-  (prn "coordinates from sample json --- \n" (get-coords "data/sample.json")))
+  (println "coordinates from sample json ---")
+  (pprint (get-coords "data/sample.json")))
